@@ -49,30 +49,44 @@ function promptUser() {
         ])
         .then(function (answer) {
 
-            // var query = "UPDATE products SET stock_quantity = stock_quantity - ? WHERE item_id = ? ";
             var query = "SELECT * FROM products WHERE ? = item_id"
             connection.query(query, [answer.id], function(err, res) {
                 if(err) throw err;
 
-                // console.log("123123");
                 // console.log(res[0]);
                 if(parseInt(res[0].stock_quantity) - parseInt(answer.quantity) >=0 )
                 { 
                     console.log(answer.quantity, answer.id)
-                    var querytwo = "UPDATE products SET stock_quantity = stock_quantity - ? WHERE item_id = ?";
-                    connection.query(querytwo, [parseInt(answer.quantity), parseInt(answer.id)], function(err, ress) 
+                    var queryTwo = "UPDATE products SET stock_quantity = stock_quantity - ? WHERE item_id = ?";
+                    connection.query(queryTwo, [parseInt(answer.quantity), parseInt(answer.id)], function(err, ress) 
                     {
                         if(err) throw err;
                         // console.log( "secondRess" ,res[0].price);
                         console.log(`you paid ${parseInt(res[0].price) * parseInt(answer.quantity)} USD`);
+                        var queryThree = "UPDATE products SET product_sales = ? * ? WHERE item_id = ?";
+
+                        connection.query(queryThree, [parseInt(answer.quantity), parseInt(res[0].price), parseInt(answer.id)], function(err, ress) 
+                        {
+                            if(err) throw err;
+                            console.log(`your new product list!`);
+                            connection.query("SELECT * FROM products", function (err, resss) {
+                                if (err) throw err;
+                                // Log all results of the SELECT statement
+                                console.table(resss);
+                                connection.end(); // watch for sync 
+
+                            });
+
+                        });
                     });
 
                 }
                 else
                 {
                     console.log("We don't have that many in stock human!");
+                    connection.end(); // watch for sync 
+
                 }
-                connection.end(); // watch for sync 
 
             });
 

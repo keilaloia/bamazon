@@ -9,8 +9,25 @@ CREATE TABLE products
     department_name VARCHAR(100) NOT NULL,
     price DECIMAL(10,2) NOT NULL,
     stock_quantity INT NULL,
+    product_sales INT NULL,
+
     PRIMARY KEY(item_id)
 );
+
+CREATE TABLE departments
+(
+    department_id INT NOT NULL AUTO_INCREMENT,
+    department_name VARCHAR(50) NOT NULL,
+    over_head_cost INT NOT NULL,
+    PRIMARY Key (department_id)
+    
+);
+
+INSERT INTO departments (department_name, over_head_cost)
+VALUES ("Electronics", 10000);
+INSERT INTO departments (department_name, over_head_cost)
+VALUES ("Active", 5000);
+
 /*1*/
 INSERT INTO products (product_name, department_name, price, stock_quantity)
 VALUES ("Macbook Pro","Electronics", 2000, 100);
@@ -34,10 +51,10 @@ INSERT INTO products (product_name, department_name, price, stock_quantity)
 VALUES ("Airpods","Electronics", 150, 1000);
 /*8*/
 INSERT INTO products (product_name, department_name, price, stock_quantity)
-VALUES ("Apple Watch","Electronics", 300, 500);
+VALUES ("Apple Watch","Active", 300, 500);
 /*9*/
 INSERT INTO products (product_name, department_name, price, stock_quantity)
-VALUES ("Fitbit","Electronics", 99, 100);
+VALUES ("Fitbit","Active", 99, 100);
 /*10*/
 INSERT INTO products (product_name, department_name, price, stock_quantity)
 VALUES ("Cortana","Electronics", 200, 100);

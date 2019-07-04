@@ -147,12 +147,3 @@ function basicQuery(query) {
         connection.end(); // watch for sync 
     });
 }
-
-
-// function sqlQuery(query, arr)
-// {
-//     connection.query(query,[arr[0]], function(err, res)
-//     {
-//         if(err) throw err;
-//     });
-// }
