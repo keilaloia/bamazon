@@ -38,7 +38,7 @@ function promptUser() {
             switch (answer.prompt) {
                 case "View Product Sales by Department":
 
-                    basicQuery("SELECT departments.department_name, departments.over_head_cost,SUM(products.product_sales) AS product_sales FROM departments INNTER JOIN products ON departments.department_name = products.department_name GROUP BY departments.department_name");
+                    basicQuery("SELECT departments.department_name,SUM(products.product_sales)AS department_sales FROM departments INNER JOIN products ON departments.department_name = products.department_name GROUP BY departments.department_name");
 
                     // basicQuery("SELECT * FROM departments");
                     break;
